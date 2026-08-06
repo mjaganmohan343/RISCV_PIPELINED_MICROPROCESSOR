@@ -1,0 +1,44 @@
+-- New ALU / Logic / Shift instructions --
+  [PASS] x1 = 00000005
+  [PASS] x2 = 00000003
+  [PASS] x3 = 00000006
+  [PASS] x4 = 00000007
+  [PASS] x5 = 00000001
+  [PASS] x6 = 00000001
+  [PASS] x7 = 0000000a
+  [PASS] x8 = 0000000d
+  [PASS] x9 = 00000001
+  [PASS] x10 = 00000014
+  [PASS] x11 = 0000000a
+  [PASS] x12 = fffffff8
+  [PASS] x13 = fffffffc
+  [PASS] x14 = 00000028
+  [PASS] x15 = 00000005
+  [PASS] x16 = ffffffff
+  [PASS] x17 = 00000001
+
+-- LUI / AUIPC --
+  [PASS] x18 = 12345000
+  [PASS] x19 = 00001048
+
+-- Branches (bne/blt/bge/bltu/bgeu) --
+  [PASS] x20 = 0000006f
+  [PASS] x21 = 000000de
+  [PASS] x22 = 0000014d
+  [PASS] x23 = 000001bc
+  [PASS] x24 = 0000022b
+
+-- Jumps (jal/jalr) --
+  [PASS] x25 = 0000008c
+  [PASS] x26 = 0000029a
+  [PASS] x27 = 00000094
+  [PASS] x28 = 0000009c
+  [PASS] x30 = 00000309
+
+-- Load/Store still correct --
+  [PASS] mem[0] = 12345000
+  [PASS] x31 = 12345000
+
+============================================
+  [SUCCESS] ALL 25 CHECKS PASSED!
+============================================
