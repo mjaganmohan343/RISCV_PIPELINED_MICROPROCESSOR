@@ -31,20 +31,12 @@ The design is split into independently testable modules (ALU, decoders, register
 
 ## Architecture
 
-```
-                ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-   PC ────────► │  FETCH   │──►│  DECODE  │──►│ EXECUTE  │──►│  MEMORY  │──►│WRITEBACK │
-                └──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-                     ▲               ▲              │              │              │
-                     │               │              ▼              │              │
-                     │          ┌─────────┐    ┌──────────┐        │              │
-                     └──────────┤ Hazard  │◄───┤ Forwarding│◄──────┴──────────────┘
-                     PCWrite    │  Unit   │    │   Muxes   │   (EX/MEM, MEM/WB → EX)
-                  IF_ID_Write   └─────────┘    └──────────┘
-                  FlushD/FlushE      ▲
-                                     │
-                             PCSrcE (branch/jump taken)
-```
+![Pipelined processor with full hazard handling and custom enhancements](pipeline_diagram.png)
+
+*Figure: full datapath and control diagram, based on the standard Harris & Harris "full hazard handling" pipeline (Fig 7.61) and extended for complete RV32I coverage. Custom enhancements beyond the reference design (highlighted in the diagram) include:*
+- *`ALUSrcA_MuxE` — forces the ALU's A input to `0` or `PC` for `lui`/`auipc`*
+- *A 6-condition `Branch Cond. Logic` block (`Zero`, `Negative`, `Overflow`, `Carry`) driven by `funct3E`, replacing the textbook's single `beq`-only zero check — supports `beq/bne/blt/bge/bltu/bgeu`*
+- *`PCTarget_MuxE` — selects between the PC-relative branch/jump adder and `{ALUResult[31:1], 0}` for `jalr`, whose target is register-relative*
 
 - **In-order, single-issue, 5-stage pipeline.**
 - Branches and jumps are resolved in the **Execute** stage (`PCSrcE`), giving a 2-cycle misprediction/redirect penalty.
@@ -236,5 +228,7 @@ This design was synthesized and implemented using the **Vivado** FPGA flow.
 - Move from a fully directed testbench toward constrained-random / UVM-style verification with functional coverage.
 
 ---
-## I did it in xilinx vivado (both synthesis and implementation) i got clk period as 13.5ns which is large for the pipelined microprocessor.
-## The reason for this is critical path in the circuit so try to optimise it(Hazard Unit - Branch Instruction).
+
+## License
+
+_Add a license (e.g., MIT) if you intend this repo to be publicly reusable._
