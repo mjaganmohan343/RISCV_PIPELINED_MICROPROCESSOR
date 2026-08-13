@@ -32,6 +32,8 @@ The design is split into independently testable modules (ALU, decoders, register
 ## Architecture
 
 ![Pipelined processor with full hazard handling and custom enhancements](pipeline_diagram.png)
+The image is ai generated as i initially implemented basic instructions, later included(total 44 instr) no proper diagram for it.
+The image is just for visualisation (dont trust it)
 
 *Figure: full datapath and control diagram, based on the standard Harris & Harris "full hazard handling" pipeline (Fig 7.61) and extended for complete RV32I coverage. Custom enhancements beyond the reference design (highlighted in the diagram) include:*
 - *`ALUSrcA_MuxE` — forces the ALU's A input to `0` or `PC` for `lui`/`auipc`*
@@ -229,6 +231,3 @@ This design was synthesized and implemented using the **Vivado** FPGA flow.
 
 ---
 
-## License
-
-_Add a license (e.g., MIT) if you intend this repo to be publicly reusable._
